@@ -1,0 +1,28 @@
+# Gaussian-SLAM Configuration for Photo-realistic SLAM
+system:
+  name: "gaussian_slam"
+  device: "cuda"
+  
+tracking:
+  keyframe_every: 10
+  max_keyframes: 30
+  photo_realistic_tracking: true
+  
+mapping:
+  photo_realistic_mapping: true
+  dense_slam: true
+  mesh_reconstruction: true
+  
+rendering:
+  high_quality_rendering: true
+  render_resolution: [1280, 720]
+  anti_aliasing: true
+  
+evaluation:
+  deterministic_results: true
+  robust_metrics: true
+  multi_dataset_support: true
+  
+performance:
+  target_fps: 3  # Very low FPS for maximum quality
+  memory_intensive: true

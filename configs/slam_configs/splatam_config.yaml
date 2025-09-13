@@ -1,0 +1,41 @@
+# SplaTAM Configuration for Real-time RGB-D SLAM
+system:
+  name: "splatam"
+  device: "cuda"
+  
+tracking:
+  max_keyframes: 20
+  keyframe_every: 5
+  tracking_iters: 10
+  use_depth: true
+  depth_scale: 1000.0
+  
+mapping:
+  mapping_iters: 60
+  mapping_every: 5
+  gaussian_lr: 0.0005
+  densification_interval: 100
+  opacity_reset_interval: 3000
+  densify_grad_threshold: 0.0002
+  
+optimization:
+  use_global_optimization: true
+  bundle_adjustment_every: 10
+  pose_graph_optimization: true
+  
+rendering:
+  render_resolution: [640, 480]
+  render_depth: true
+  render_mode: "rgb"
+  
+performance:
+  max_fps: 30
+  enable_profiling: false
+  memory_limit_gb: 4
+  
+# Wearable-specific optimizations
+wearable:
+  power_optimization: false
+  adaptive_quality: true
+  motion_prediction: true
+  head_motion_model: true

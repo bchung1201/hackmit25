@@ -1,0 +1,29 @@
+# Splat-SLAM Configuration for High-Accuracy SLAM
+system:
+  name: "splat_slam"
+  device: "cuda"
+  
+tracking:
+  keyframe_every: 8
+  max_keyframes: 50
+  tracking_iterations: 20
+  
+mapping:
+  mapping_iterations: 100
+  global_optimization: true
+  deformable_gaussians: true
+  dspo_layer: true
+  
+optimization:
+  pose_graph_optimization: true
+  bundle_adjustment_interval: 20
+  global_ba_interval: 100
+  
+quality:
+  high_accuracy_mode: true
+  dense_geometry_extraction: true
+  mesh_reconstruction: false
+  
+performance:
+  target_fps: 5  # Lower FPS for higher accuracy
+  enable_profiling: true

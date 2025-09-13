@@ -13,7 +13,7 @@ from pathlib import Path
 sys.path.append(str(Path(__file__).parent))
 
 from config import DEFAULT_CONFIG
-from video_pipeline import MentraVideoPipeline
+from enhanced_video_pipeline import EnhancedMentraVideoPipeline
 
 # Configure logging
 logging.basicConfig(
@@ -27,20 +27,21 @@ async def main():
     logger.info("🚀 Starting Mentra Video Processing Pipeline")
     logger.info("=" * 60)
     
-    # Create video pipeline with configuration
+    # Create enhanced video pipeline with SLAM configuration
     config_dict = DEFAULT_CONFIG.to_dict()
-    pipeline = MentraVideoPipeline(config_dict, use_mock_components=DEFAULT_CONFIG.use_mock_components)
+    pipeline = EnhancedMentraVideoPipeline(config_dict, use_mock_components=DEFAULT_CONFIG.use_mock_components)
     
     try:
         # Start pipeline
         await pipeline.start()
         
         # Keep running until interrupted
-        logger.info("✅ Video pipeline running successfully!")
+        logger.info("✅ Enhanced video pipeline with SLAM running successfully!")
         logger.info("📹 Processing video stream from Mentra glasses...")
-        logger.info("🏗️ Running 3D reconstruction with Gaussian Splatting...")
+        logger.info("🗺️ Running advanced SLAM with Gaussian Splatting...")
         logger.info("🎯 Performing object segmentation with SAM...")
         logger.info("🧠 Analyzing scenes with Claude VLM...")
+        logger.info("🔄 Real-time trajectory tracking and loop closure detection...")
         logger.info("")
         logger.info("Press Ctrl+C to stop the pipeline")
         

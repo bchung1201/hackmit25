@@ -1,0 +1,3 @@
+"""
+SplaTAM backend implementation
+"""

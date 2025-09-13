@@ -1,0 +1,40 @@
+# MonoGS Configuration for Monocular SLAM
+system:
+  name: "monogs"
+  device: "cuda"
+  
+tracking:
+  tracker_type: "droid"
+  keyframe_every: 12
+  max_keyframes: 20
+  tracking_window: 12
+  frontend_nms: 1
+  
+mapping:
+  densification_interval: 100
+  opacity_reset_interval: 3000
+  densify_grad_threshold: 0.0002
+  densify_size_threshold: 20
+  mapping_every: 5
+  
+gui:
+  enable: false  # Disable for headless operation
+  port: 8080
+  show_trajectory: true
+  
+performance:
+  target_fps: 10  # MonoGS speed-up branch target
+  enable_speed_up: true
+  use_fast_rendering: true
+  
+# Monocular-specific settings
+monocular:
+  depth_initialization: "random"
+  scale_recovery: true
+  loop_closure_threshold: 0.5
+  
+# Real-time optimizations
+realtime:
+  enable_parallel_tracking: true
+  enable_parallel_mapping: true
+  max_mapping_threads: 2
