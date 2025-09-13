@@ -1,0 +1,27 @@
+# Core dependencies for video processing
+opencv-python==4.8.1.78
+numpy==1.24.3
+Pillow==10.0.1
+
+# Modal compute for 3D reconstruction
+modal==0.62.0
+
+# SAM segmentation
+torch==2.1.0
+torchvision==0.16.0
+segment-anything==1.0
+
+# Claude VLM for scene understanding
+anthropic==0.7.8
+
+# Video streaming
+ffmpeg-python==0.2.0
+rtsp-rtmp-stream==0.0.1
+
+# 3D processing
+open3d==0.17.0
+trimesh==3.23.5
+
+# Utilities
+python-dotenv==1.0.0
+pydantic==2.5.0
