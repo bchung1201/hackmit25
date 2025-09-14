@@ -32,6 +32,14 @@ face-alignment>=1.1.1
 mediapipe>=0.10.0
 fer>=22.4.0
 
+# 3D Reconstruction
+ultralytics>=8.0.0
+pyrender>=0.1.45
+open3d>=0.17.0
+trimesh>=3.23.5
+pyyaml>=6.0.0
+modal>=0.60.0
+
 # Utilities
 python-dotenv>=1.0.0
 pydantic>=2.5.0
