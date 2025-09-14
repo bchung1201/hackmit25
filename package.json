@@ -1,0 +1,23 @@
+{
+  "name": "mentra-reality-pipeline",
+  "version": "1.0.0",
+  "description": "Mentra Reality Pipeline - 3D Reconstruction and Emotion Detection Demo",
+  "main": "index.html",
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "echo 'Static site - no build needed'",
+    "start": "python -m http.server 8000"
+  },
+  "keywords": [
+    "3d-reconstruction",
+    "emotion-detection",
+    "computer-vision",
+    "spatial-analysis",
+    "hackmit2025"
+  ],
+  "author": "Mentra Reality Team",
+  "license": "MIT",
+  "devDependencies": {
+    "vercel": "^32.0.0"
+  }
+}

@@ -50,40 +50,40 @@
     </section>
 
     <!-- Interactive Demo Section -->
-    <section class="demo-section">
+    <section class="demo-section" id="demo-section">
         <div class="container">
             <h2 class="content-title">Experience the Echo</h2>
             <p class="content-subtitle">
                 Perfect for real estate professionals, sales professionals, or anyone who works with convincing people about spaces. Walk through any space with clients and watch spatial data echo back as intelligent room analysis, emotion analysis of their reactions, accessibility assessment, and visual heatmaps of their responses to the space.
             </p>
             
-            <div class="demo-container">
-                <div class="demo-card">
+            <div class="demo-container" style="max-width: 100%;">
+                <div class="demo-card" style="width: 100%; max-width: none; padding: 2rem;">
                     <h3>Experience the Echo in Action</h3>
-                    <p>Upload a video to see how spatial data flows through spaces, capturing client reactions, room intelligence, and accessibility insights in real-time</p>
+                    <p>Watch how spatial data flows through spaces, capturing client reactions, room intelligence, and accessibility insights in real-time</p>
                     
-                    <!-- Video Upload Area -->
-                    <div class="demo-visualization">
-                        <div class="video-container" id="videoContainer">
-                            <video id="demoVideo" style="display: none;"></video>
-                            <canvas id="emotionCanvas" style="display: none;"></canvas>
+                    <!-- Video Analysis Area -->
+                    <div class="demo-visualization" style="width: 100%;">
+                        <div class="video-container" id="videoContainer" style="width: 100%; aspect-ratio: 16/9;">
+                            <video id="demoVideo" style="display: none; width: 100%; height: 100%; object-fit: cover;"></video>
+                            <canvas id="emotionCanvas" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;"></canvas>
                             <div class="processing-overlay" id="processingOverlay" style="display: none;">
                                 <div class="processing-spinner"></div>
                                 <p>Processing video...</p>
                             </div>
                             
-                            <!-- Upload Area -->
-                            <div class="upload-area" id="uploadArea" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; border: 2px dashed rgba(255,255,255,0.2); border-radius: 12px; cursor: pointer; transition: all 0.3s ease;">
+                            <!-- Video Placeholder -->
+                            <div class="upload-area" id="uploadArea" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; border: 2px solid rgba(255,255,255,0.2); border-radius: 12px; cursor: pointer; transition: all 0.3s ease; background: rgba(0,0,0,0.3);">
                                 <div class="upload-icon" style="font-size: 3rem; margin-bottom: 1rem;">📹</div>
-                                <p style="margin: 0; font-size: 1.125rem; color: #ffffff;">Click to upload video or drag & drop</p>
-                                <p style="margin: 0.5rem 0 0 0; font-size: 0.875rem; color: #888888;">MP4, MOV, AVI supported</p>
+                                <p style="margin: 0; font-size: 1.125rem; color: #ffffff;">Click to load demo video</p>
+                                <p style="margin: 0.5rem 0 0 0; font-size: 0.875rem; color: #888888;">test_video_1.mp4</p>
                             </div>
                             
                             <input type="file" id="videoInput" accept="video/*" style="display: none;">
                         </div>
                         
                         <!-- Demo Controls -->
-                        <div class="demo-controls" style="margin-top: 2rem;">
+                        <div class="demo-controls" style="margin-top: 2rem; display: flex; justify-content: center; gap: 1rem;">
                             <button class="demo-button" id="startDemo">Start Demo</button>
                             <button class="demo-button" id="processVideo" style="display: none;">Process Video</button>
                             <button class="demo-button" id="stopDemo" style="display: none;">Stop</button>
@@ -136,6 +136,109 @@
         </div>
     </section>
 
+    <!-- Mapping Demo Section -->
+    <section class="demo-section" id="mapping-section">
+        <div class="container">
+            <h2 class="content-title">Experience the Mapping</h2>
+            <p class="content-subtitle">
+                Watch how spatial data flows from your eyes to create intelligent room mapping. See the real-time reconstruction as you navigate through spaces, capturing every detail and creating a complete 3D understanding of the environment.
+            </p>
+            
+            <div class="demo-container" style="max-width: 100%;">
+                <div class="demo-card" style="width: 100%; max-width: none; padding: 2rem;">
+                    <h3>From Eyes to Space</h3>
+                    <p>Experience the complete mapping pipeline - from visual input to 3D reconstruction</p>
+                    
+                    <!-- Dual Video Mapping Area -->
+                    <div class="demo-visualization" style="width: 100%;">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem;">
+                            <!-- Input Video -->
+                            <div class="video-container" id="inputVideoContainer" style="width: 100%; aspect-ratio: 16/9;">
+                                <video id="inputVideo" style="display: none; width: 100%; height: 100%; object-fit: cover;"></video>
+                                <div class="processing-overlay" id="inputProcessingOverlay" style="display: none;">
+                                    <div class="processing-spinner"></div>
+                                    <p>Loading input video...</p>
+                                </div>
+                                
+                                <!-- Input Video Placeholder -->
+                                <div class="upload-area" id="inputVideoArea" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; border: 2px solid rgba(255,255,255,0.2); border-radius: 12px; cursor: pointer; transition: all 0.3s ease; background: rgba(0,0,0,0.3);">
+                                    <div class="upload-icon" style="font-size: 3rem; margin-bottom: 1rem;">👁️</div>
+                                    <p style="margin: 0; font-size: 1.125rem; color: #ffffff;">Input Video</p>
+                                    <p style="margin: 0.5rem 0 0 0; font-size: 0.875rem; color: #888888;">scannetpp_s1_nvs_loop.mp4</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Reconstruction Video -->
+                            <div class="video-container" id="reconVideoContainer" style="width: 100%; aspect-ratio: 16/9;">
+                                <video id="reconVideo" style="display: none; width: 100%; height: 100%; object-fit: cover;"></video>
+                                <div class="processing-overlay" id="reconProcessingOverlay" style="display: none;">
+                                    <div class="processing-spinner"></div>
+                                    <p>Loading reconstruction...</p>
+                                </div>
+                                
+                                <!-- Reconstruction Video Placeholder -->
+                                <div class="upload-area" id="reconVideoArea" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; border: 2px solid rgba(255,255,255,0.2); border-radius: 12px; cursor: pointer; transition: all 0.3s ease; background: rgba(0,0,0,0.3);">
+                                    <div class="upload-icon" style="font-size: 3rem; margin-bottom: 1rem;">🏗️</div>
+                                    <p style="margin: 0; font-size: 1.125rem; color: #ffffff;">3D Reconstruction</p>
+                                    <p style="margin: 0.5rem 0 0 0; font-size: 0.875rem; color: #888888;">scannetpp_s1_recon.mp4</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Mapping Controls -->
+                        <div class="demo-controls" style="margin-top: 2rem; display: flex; justify-content: center; gap: 1rem;">
+                            <button class="demo-button" id="loadMappingVideos">Load Mapping Videos</button>
+                            <button class="demo-button" id="startMappingDemo" style="display: none;">Start Mapping Demo</button>
+                            <button class="demo-button" id="stopMappingDemo" style="display: none;">Stop</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="demo-results" id="mappingResults" style="display: none;">
+                <div class="results-grid">
+                    <div class="result-card">
+                        <h3>Space Mapping</h3>
+                        <div class="spatial-heatmap" id="mappingHeatmap">
+                            <div style="text-align: center; padding: 2rem;">
+                                <div style="font-size: 2rem; margin-bottom: 1rem;">🗺️</div>
+                                <div style="font-size: 1.25rem; font-weight: bold; color: #00d4ff; margin-bottom: 0.5rem;" id="mappedRooms">0 Rooms Mapped</div>
+                                <div style="font-size: 1rem; color: #ffffff;" id="mappingAccuracy">0% Accuracy</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="result-card">
+                        <h3>3D Reconstruction</h3>
+                        <div class="room-analysis" id="reconstructionAnalysis">
+                            <div style="text-align: center; padding: 2rem;">
+                                <div style="font-size: 2rem; margin-bottom: 1rem;">🏗️</div>
+                                <div style="font-size: 1.25rem; font-weight: bold; color: #00d4ff; margin-bottom: 0.5rem;" id="reconstructedObjects">0 Objects</div>
+                                <div style="font-size: 1rem; color: #ffffff;" id="reconstructionQuality">0% Quality</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="result-card">
+                        <h3>Visual Processing</h3>
+                        <div class="real-estate-echo" id="visualProcessing">
+                            <div style="text-align: center; padding: 2rem;">
+                                <div style="font-size: 2rem; margin-bottom: 1rem;">👁️</div>
+                                <div style="font-size: 1.25rem; font-weight: bold; color: #00d4ff; margin-bottom: 0.5rem;">Real-time Processing</div>
+                                <div style="font-size: 1rem; color: #ffffff;">From eyes to space</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Download Links for Mapping -->
+                <div style="margin-top: 2rem; text-align: center;">
+                    <button class="demo-button" id="downloadMapping3D" style="margin: 0.5rem;">Download 3D Scene</button>
+                    <button class="demo-button" id="downloadMappingScreenshot" style="margin: 0.5rem;">Download Screenshot</button>
+                    <button class="demo-button" id="downloadMappingData" style="margin: 0.5rem;">Download Mapping Data</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Additional Content Sections -->
     <section class="content-section">
         <div class="container">
@@ -171,36 +274,17 @@
                 Perfect for real estate professionals, sales professionals, or anyone who works with convincing people about spaces. Walk through any space with clients and watch spatial data echo back as intelligent room analysis, emotion analysis of their reactions, accessibility assessment, and visual heatmaps of their responses to the space. They will get spatial data about the thing.
             </p>
             <div class="cta-container">
-                <button class="cta-button" onclick="document.getElementById('uploadArea').click()">Try the echo</button>
+                <button class="cta-button" onclick="loadMappingDemo()">Experience the Mapping</button>
             </div>
         </div>
     </section>
 
     <section class="content-section">
         <div class="container">
-            <h2 class="content-title">A VENTURE BY HACKMIT</h2>
-            <div class="credits">
-                <div class="credit-item">
-                    <span class="credit-label">CLIENT</span>
-                    <span class="credit-value">HackMIT 2025</span>
-                </div>
-                <div class="credit-item">
-                    <span class="credit-label">Vision + Concept</span>
-                    <span class="credit-value">Spatial Echo Team</span>
-                </div>
-                <div class="credit-item">
-                    <span class="credit-label">Software + Hardware</span>
-                    <span class="credit-value">Spatial Analysis Engineers</span>
-                </div>
-                <div class="credit-item">
-                    <span class="credit-label">Industrial Design</span>
-                    <span class="credit-value">Mentra Glasses</span>
-                </div>
-                <div class="credit-item">
-                    <span class="credit-label">YEAR</span>
-                    <span class="credit-value">2025</span>
-                </div>
-            </div>
+            <h2 class="content-title">HACKMIT 2025 Project</h2>
+            <p class="content-subtitle" style="font-size: 1.5rem; margin-top: 1rem;">
+                by Bryan Chung, Ege Doğanay, Sarena Yousuf, Tobasum Mandall
+            </p>
         </div>
     </section>
 
