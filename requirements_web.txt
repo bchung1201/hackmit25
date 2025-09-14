@@ -1,0 +1,29 @@
+# Web Application Dependencies
+Flask==2.3.3
+Flask-CORS==4.0.0
+Werkzeug==2.3.7
+
+# Existing pipeline dependencies
+opencv-python==4.8.1.78
+numpy>=1.24.3
+Pillow==10.0.1
+torch>=2.1.0
+torchvision>=0.16.0
+scipy>=1.10.0
+scikit-image>=0.20.0
+matplotlib>=3.6.0
+tqdm>=4.64.0
+imageio>=2.25.0
+anthropic>=0.7.8
+ffmpeg-python>=0.2.0
+open3d>=0.17.0
+trimesh>=3.23.5
+face-alignment>=1.1.1
+mediapipe>=0.10.0
+fer>=22.4.0
+ultralytics>=8.0.0
+pyrender>=0.1.45
+modal>=0.60.0
+python-dotenv>=1.0.0
+pydantic>=2.5.0
+PyYAML>=6.0.0
