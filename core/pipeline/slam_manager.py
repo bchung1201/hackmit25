@@ -2,7 +2,7 @@
 SLAM Manager for handling multiple SLAM backends and adaptive switching
 """
 
-from typing import Dict, Any, Optional, Type, List
+from typing import Dict, Any, Optional, Type, List, Tuple
 import logging
 import asyncio
 import numpy as np
