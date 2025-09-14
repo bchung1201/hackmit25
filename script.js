@@ -1,4 +1,4 @@
-// Mentra Reality Pipeline Demo Integration
+// Mentra Reality Pipeline Demo Integration - GitHub Pages Version
 document.addEventListener('DOMContentLoaded', function() {
     // Simple scroll effect for navigation
     const nav = document.querySelector('.nav');
@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Demo Integration
+// Demo Integration - GitHub Pages Static Version
 function initializeDemo() {
     const uploadArea = document.getElementById('uploadArea');
     const videoInput = document.getElementById('videoInput');
@@ -131,6 +131,19 @@ function initializeDemo() {
     processVideoBtn.addEventListener('click', processVideo);
     stopDemoBtn.addEventListener('click', stopDemo);
 
+    // Download button handlers
+    document.getElementById('download3D').addEventListener('click', () => {
+        showNotification('3D Scene download would start here (Demo Mode)');
+    });
+    
+    document.getElementById('downloadEmotion').addEventListener('click', () => {
+        showNotification('Emotion Map download would start here (Demo Mode)');
+    });
+    
+    document.getElementById('downloadScreenshot').addEventListener('click', () => {
+        showNotification('Screenshot download would start here (Demo Mode)');
+    });
+
     function handleVideoFile(file) {
         const url = URL.createObjectURL(file);
         demoVideo.src = url;
@@ -154,7 +167,7 @@ function initializeDemo() {
         // Simulate pipeline initialization
         setTimeout(() => {
             processingOverlay.style.display = 'none';
-            showNotification('Pipeline initialized successfully!');
+            showNotification('Demo pipeline initialized! (Static Demo Mode)');
         }, 2000);
     }
 
@@ -166,82 +179,8 @@ function initializeDemo() {
         processVideoBtn.disabled = true;
         stopDemoBtn.style.display = 'inline-block';
         
-        // Try to use real pipeline, fallback to simulation
-        processVideoWithPipeline();
-    }
-    
-    async function processVideoWithPipeline() {
-        try {
-            // Check if backend is available
-            const response = await fetch('/api/demo_mode');
-            const data = await response.json();
-            
-            if (data.pipeline_available) {
-                // Use real pipeline
-                await processWithRealPipeline();
-            } else {
-                // Use demo mode
-                simulateVideoProcessing();
-            }
-        } catch (error) {
-            console.log('Backend not available, using simulation');
+        // Always use simulation for GitHub Pages
             simulateVideoProcessing();
-        }
-    }
-    
-    async function processWithRealPipeline() {
-        const formData = new FormData();
-        const videoFile = videoInput.files[0];
-        
-        if (!videoFile) {
-            showNotification('No video file selected');
-            return;
-        }
-        
-        formData.append('video', videoFile);
-        
-        try {
-            const response = await fetch('/api/process_video', {
-                method: 'POST',
-                body: formData
-            });
-            
-            const result = await response.json();
-            
-            if (result.success) {
-                // Process real results
-                processRealResults(result.results);
-            } else {
-                throw new Error(result.error || 'Processing failed');
-            }
-        } catch (error) {
-            console.error('Pipeline processing error:', error);
-            showNotification('Pipeline error, using simulation');
-            simulateVideoProcessing();
-        }
-    }
-    
-    function processRealResults(results) {
-        // Process real pipeline results
-        emotionData = results.emotions || [];
-        roomData = results.rooms || [];
-        trajectoryData = results.trajectory || [];
-        
-        // Update UI with real data
-        updateEmotionChart();
-        updateRoomMap();
-        updateTrajectoryViz();
-        
-        // Show results
-        showResults();
-        showNotification('Video processing completed with real pipeline!');
-        
-        // Reset processing state
-        isProcessing = false;
-        processingOverlay.style.display = 'none';
-        processVideoBtn.disabled = false;
-        stopDemoBtn.style.display = 'none';
-        startDemoBtn.style.display = 'inline-block';
     }
 
     function stopDemo() {
@@ -273,7 +212,7 @@ function initializeDemo() {
             
             // Update processing text
             const processingText = processingOverlay.querySelector('p');
-            processingText.textContent = `Processing video... ${Math.round(percent)}%`;
+            processingText.textContent = `Processing video... ${Math.round(percent)}% (Demo Mode)`;
             
             // Simulate emotion detection
             if (progress % 1000 === 0) {
@@ -380,19 +319,15 @@ function initializeDemo() {
         
         // Show results
         showResults();
-        showNotification('Video processing completed!');
+        showNotification('Video processing completed! (Demo Mode)');
     }
 
     function showResults() {
         demoResults.style.display = 'block';
         
-        // Update spatial heatmap
+        // Update results with simulated data
         updateSpatialHeatmap();
-        
-        // Update room analysis
         updateRoomAnalysis();
-        
-        // Update real estate echo
         updateRealEstateEcho();
         
         // Scroll to results
@@ -400,94 +335,33 @@ function initializeDemo() {
     }
 
     function updateSpatialHeatmap() {
-        const heatmap = document.getElementById('spatialHeatmap');
-        heatmap.innerHTML = 'Spatial Intensity';
+        const roomCount = document.getElementById('roomCount');
+        const furnitureCount = document.getElementById('furnitureCount');
+        
+        // Simulate 3D reconstruction results
+        const rooms = Math.floor(Math.random() * 5) + 3; // 3-7 rooms
+        const furniture = Math.floor(Math.random() * 15) + 5; // 5-19 furniture pieces
+        
+        roomCount.textContent = `${rooms} Rooms`;
+        furnitureCount.textContent = `${furniture} Furniture`;
     }
 
     function updateRoomAnalysis() {
-        const analysis = document.getElementById('roomAnalysis');
+        const emotionCount = document.getElementById('emotionCount');
+        const roomEmotions = document.getElementById('roomEmotions');
         
-        const roomData = [
-            { name: 'Living Room', score: 78, area: 320, accessibility: 'Wheelchair Accessible' },
-            { name: 'Kitchen', score: 92, area: 180, accessibility: 'Limited Access' },
-            { name: 'Bedroom', score: 64, area: 226, accessibility: 'Wheelchair Accessible' },
-            { name: 'Bathroom', score: 81, area: 95, accessibility: 'Limited Access' }
-        ];
+        // Simulate emotion analysis results
+        const emotions = emotionData.length;
+        const rooms = roomData.length;
         
-        let analysisHTML = '';
-        
-        roomData.forEach(room => {
-            analysisHTML += `
-                <div style="margin-bottom: 1rem; padding: 0.75rem; border: 1px solid rgba(255,255,255,0.2); border-radius: 6px;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-                        <span style="font-weight: bold; color: #ffffff; font-size: 0.875rem;">${room.name}</span>
-                        <span style="color: #00d4ff; font-size: 0.875rem; font-weight: bold;">${room.score}%</span>
-                    </div>
-                    <div style="font-size: 0.75rem; color: #888888; margin-bottom: 0.5rem;">
-                        ${room.area} sq ft • ${room.accessibility}
-                    </div>
-                    <div style="width: 100%; height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px;">
-                        <div style="height: 100%; width: ${room.score}%; background: #00d4ff; border-radius: 2px;"></div>
-                    </div>
-                </div>
-            `;
-        });
-        
-        analysis.innerHTML = analysisHTML;
+        emotionCount.textContent = `${emotions} Emotions`;
+        roomEmotions.textContent = `${rooms} Rooms Analyzed`;
     }
 
     function updateRealEstateEcho() {
-        const echo = document.getElementById('realEstateEcho');
-        
-        const echoData = {
-            totalArea: 1200,
-            accessibilityScore: 85,
-            spatialEfficiency: 92,
-            naturalLight: 78,
-            flowScore: 88
-        };
-        
-        let echoHTML = `
-            <div style="font-size: 2rem; font-weight: bold; color: #00d4ff; margin-bottom: 1rem;">
-                ${echoData.totalArea} sq ft
-            </div>
-            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-bottom: 1rem;">
-                <div style="text-align: center;">
-                    <div style="font-size: 1.5rem; font-weight: bold; color: #00d4ff;">
-                        ${echoData.accessibilityScore}%
-                    </div>
-                    <div style="font-size: 0.75rem; color: #ffffff; margin-top: 0.25rem;">
-                        Accessibility
-                    </div>
-                </div>
-                <div style="text-align: center;">
-                    <div style="font-size: 1.5rem; font-weight: bold; color: #00d4ff;">
-                        ${echoData.spatialEfficiency}%
-                    </div>
-                    <div style="font-size: 0.75rem; color: #ffffff; margin-top: 0.25rem;">
-                        Spatial Efficiency
-                    </div>
-                </div>
-                <div style="text-align: center;">
-                    <div style="font-size: 1.5rem; font-weight: bold; color: #00d4ff;">
-                        ${echoData.naturalLight}%
-                    </div>
-                    <div style="font-size: 0.75rem; color: #ffffff; margin-top: 0.25rem;">
-                        Natural Light
-                    </div>
-                </div>
-                <div style="text-align: center;">
-                    <div style="font-size: 1.5rem; font-weight: bold; color: #00d4ff;">
-                        ${echoData.flowScore}%
-                    </div>
-                    <div style="font-size: 0.75rem; color: #ffffff; margin-top: 0.25rem;">
-                        Flow Score
-                    </div>
-                </div>
-            </div>
-        `;
-        
-        echo.innerHTML = echoHTML;
+        // This section shows the floor map visualization
+        // In a real implementation, this would show the actual emotion map
+        console.log('Floor map would be generated here');
     }
 
     function showNotification(message) {
