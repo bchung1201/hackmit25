@@ -1,0 +1,60 @@
+EMOTION SUMMARY REPORT
+==================================================
+
+OVERALL STATISTICS
+--------------------
+Overall Mood: positive
+Most Emotional Room: Bar Room
+Least Emotional Room: Bathroom
+Total Processing Time: 798.26 seconds
+Rooms with Data: 3
+
+ROOM-BY-ROOM ANALYSIS
+-------------------------
+
+BAR ROOM
+--------
+Dominant Emotion: Sad
+Average Confidence: 0.406
+Average Intensity: 0.406
+Emotion Trend: declining
+Total Time: 796.96 seconds
+Emotion Count: 88
+Emotion Distribution:
+  Sad: 53.4%
+  Angry: 18.2%
+  Happy: 11.4%
+  Surprise: 11.4%
+  Neutral: 5.7%
+
+BEDROOM
+-------
+Dominant Emotion: Sad
+Average Confidence: 0.303
+Average Intensity: 0.303
+Emotion Trend: declining
+Total Time: 579.13 seconds
+Emotion Count: 4
+Emotion Distribution:
+  Sad: 75.0%
+  Happy: 25.0%
+
+BATHROOM
+--------
+Dominant Emotion: Sad
+Average Confidence: 0.204
+Average Intensity: 0.204
+Emotion Trend: insufficient_data
+Total Time: 0.00 seconds
+Emotion Count: 1
+Emotion Distribution:
+  Sad: 100.0%
+
+PROCESSING STATISTICS
+----------------------
+Total Frames Processed: 617
+Total Emotions Detected: 93
+Rooms with Emotions: 3
+Room History Length: 617
+Available Models: emonet, fer2013, simple_cnn, mediapipe
+Model Priorities: emonet, fer2013, simple_cnn, mediapipe

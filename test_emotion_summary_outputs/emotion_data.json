@@ -1,0 +1,19 @@
+{
+  "overall_mood": "unknown",
+  "most_emotional_room": "Bar Room",
+  "least_emotional_room": "Bar Room",
+  "total_processing_time": 18.26086956521739,
+  "rooms": {
+    "Bar Room": {
+      "dominant_emotion": "Surprise",
+      "emotion_distribution": {
+        "Surprise": 1.0
+      },
+      "average_confidence": 0.21246735751628876,
+      "average_intensity": 0.21246735751628876,
+      "emotion_trend": "insufficient_data",
+      "total_time": 0.0,
+      "emotion_count": 1
+    }
+  }
+}

@@ -47,6 +47,14 @@ class PipelineConfig:
     enable_dense_mapping: bool = True
     enable_photo_realistic_rendering: bool = False
     
+    # Emotion Detection Settings
+    enable_emotion_detection: bool = True
+    enable_room_highlighting: bool = True
+    emotion_detection_fps: int = 10
+    face_detection_method: str = "opencv"  # opencv, mtcnn
+    emonet_model_path: str = "pretrained/emonet_8.pth"
+    n_emotion_classes: int = 8
+    
     # Development Settings
     use_mock_components: bool = True
     log_level: str = "INFO"
@@ -62,6 +70,12 @@ class PipelineConfig:
             video_buffer_size=int(os.getenv('VIDEO_BUFFER_SIZE', '10')),
             max_queue_size=int(os.getenv('MAX_QUEUE_SIZE', '5')),
             processing_fps=int(os.getenv('PROCESSING_FPS', '30')),
+            enable_emotion_detection=os.getenv('ENABLE_EMOTION_DETECTION', 'true').lower() == 'true',
+            enable_room_highlighting=os.getenv('ENABLE_ROOM_HIGHLIGHTING', 'true').lower() == 'true',
+            emotion_detection_fps=int(os.getenv('EMOTION_DETECTION_FPS', '10')),
+            face_detection_method=os.getenv('FACE_DETECTION_METHOD', 'opencv'),
+            emonet_model_path=os.getenv('EMONET_MODEL_PATH', 'pretrained/emonet_8.pth'),
+            n_emotion_classes=int(os.getenv('N_EMOTION_CLASSES', '8')),
             use_mock_components=os.getenv('USE_MOCK_COMPONENTS', 'true').lower() == 'true',
             log_level=os.getenv('LOG_LEVEL', 'INFO')
         )

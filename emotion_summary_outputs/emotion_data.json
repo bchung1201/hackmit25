@@ -1,0 +1,46 @@
+{
+  "overall_mood": "positive",
+  "most_emotional_room": "Bar Room",
+  "least_emotional_room": "Bathroom",
+  "total_processing_time": 798.2608695652174,
+  "rooms": {
+    "Bar Room": {
+      "dominant_emotion": "Sad",
+      "emotion_distribution": {
+        "Angry": 0.18181818181818182,
+        "Sad": 0.5340909090909091,
+        "Happy": 0.11363636363636363,
+        "Surprise": 0.11363636363636363,
+        "Neutral": 0.056818181818181816
+      },
+      "average_confidence": 0.4064932474019853,
+      "average_intensity": 0.4064932474019853,
+      "emotion_trend": "declining",
+      "total_time": 796.9565217391304,
+      "emotion_count": 88
+    },
+    "Bedroom": {
+      "dominant_emotion": "Sad",
+      "emotion_distribution": {
+        "Sad": 0.75,
+        "Happy": 0.25
+      },
+      "average_confidence": 0.30287095680832865,
+      "average_intensity": 0.30287095680832865,
+      "emotion_trend": "declining",
+      "total_time": 579.1304347826087,
+      "emotion_count": 4
+    },
+    "Bathroom": {
+      "dominant_emotion": "Sad",
+      "emotion_distribution": {
+        "Sad": 1.0
+      },
+      "average_confidence": 0.20383843779563904,
+      "average_intensity": 0.20383843779563904,
+      "emotion_trend": "insufficient_data",
+      "total_time": 0.0,
+      "emotion_count": 1
+    }
+  }
+}

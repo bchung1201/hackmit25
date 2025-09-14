@@ -1,0 +1,17 @@
+# Minimal requirements for testing the SLAM pipeline
+# These should install without issues on most systems
+
+# Core Python packages
+numpy>=1.24.0
+opencv-python>=4.8.0
+Pillow>=10.0.0
+matplotlib>=3.6.0
+tqdm>=4.0.0
+PyYAML>=6.0.0
+python-dotenv>=1.0.0
+
+# Basic async support (built into Python 3.7+)
+# asyncio is built-in, no need to install
+
+# For VLM (optional)
+# anthropic>=0.7.8  # Uncomment if you have API key

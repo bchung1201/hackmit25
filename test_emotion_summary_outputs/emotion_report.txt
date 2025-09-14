@@ -1,0 +1,33 @@
+EMOTION SUMMARY REPORT
+==================================================
+
+OVERALL STATISTICS
+--------------------
+Overall Mood: unknown
+Most Emotional Room: Bar Room
+Least Emotional Room: Bar Room
+Total Processing Time: 18.26 seconds
+Rooms with Data: 1
+
+ROOM-BY-ROOM ANALYSIS
+-------------------------
+
+BAR ROOM
+--------
+Dominant Emotion: Surprise
+Average Confidence: 0.212
+Average Intensity: 0.212
+Emotion Trend: insufficient_data
+Total Time: 0.00 seconds
+Emotion Count: 1
+Emotion Distribution:
+  Surprise: 100.0%
+
+PROCESSING STATISTICS
+----------------------
+Total Frames Processed: 11
+Total Emotions Detected: 1
+Rooms with Emotions: 1
+Room History Length: 11
+Available Models: emonet, fer2013, simple_cnn, mediapipe
+Model Priorities: emonet, fer2013, simple_cnn, mediapipe

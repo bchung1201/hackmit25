@@ -1,23 +1,26 @@
-# SLAM-specific dependencies for advanced Gaussian Splatting integration
-torch>=2.1.0
-torchvision>=0.16.0
-pytorch3d>=0.7.4
-kornia>=0.7.0
-roma>=1.3.0
-lietorch>=0.2.0
-evo>=1.16.0
-gdown>=4.6.0
-tqdm>=4.64.0
-wandb>=0.13.0
-matplotlib>=3.6.0
+# SLAM-specific dependencies (optional, for advanced features)
+# Install these only if you need full SLAM functionality
+
+# Advanced ML libraries (optional)
+# pytorch3d  # Uncomment if needed - requires specific PyTorch version
+# kornia>=0.7.0
+# wandb>=0.13.0
+
+# Visualization (optional)
 plotly>=5.11.0
-rerun-sdk>=0.10.0
-scipy>=1.10.0
-scikit-image>=0.20.0
-imageio>=2.25.0
-trimesh>=3.23.5
-open3d>=0.17.0
-nerfstudio>=0.3.0
-gsplat>=0.1.0
-diff-gaussian-rasterization>=0.0.0
-simple-knn>=0.0.0
+
+# Utilities for SLAM (optional)
+gdown>=4.6.0
+
+# Note: The following packages may not be available on PyPI:
+# - roma>=1.3.0
+# - lietorch>=0.2.0  
+# - evo>=1.16.0
+# - rerun-sdk>=0.10.0
+# - nerfstudio>=0.3.0
+# - gsplat>=0.1.0
+# - diff-gaussian-rasterization
+# - simple-knn
+# 
+# These should be installed manually from their respective repositories
+# when you need full SLAM functionality

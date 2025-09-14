@@ -16,6 +16,7 @@ from unified_slam_reconstruction import UnifiedSLAMReconstructor, MockSLAMRecons
 from sam_segmentation import SAMSegmenter, MockSAMSegmenter, SegmentationResult
 from claude_vlm import ClaudeVLMProcessor, MockClaudeVLMProcessor, SceneDescription
 from core.interfaces.base_slam_backend import SLAMResult
+from emotion_room_mapper import EmotionRoomMapper
 
 logger = logging.getLogger(__name__)
 
@@ -35,6 +36,12 @@ class EnhancedVideoPipelineState:
     loop_closures: List[tuple] = None
     map_confidence: float = 0.0
     
+    # Emotion detection state
+    current_emotion: Optional[str] = None
+    emotion_intensity: float = 0.0
+    highlighted_rooms: List[str] = None
+    emotion_confidence: float = 0.0
+    
     # Performance metrics
     frame_count: int = 0
     processing_latency: float = 0.0
@@ -46,6 +53,8 @@ class EnhancedVideoPipelineState:
             self.camera_trajectory = []
         if self.loop_closures is None:
             self.loop_closures = []
+        if self.highlighted_rooms is None:
+            self.highlighted_rooms = []
 
 class EnhancedMentraVideoPipeline:
     """Enhanced video pipeline with advanced SLAM integration"""
@@ -82,6 +91,11 @@ class EnhancedMentraVideoPipeline:
         self.enable_global_optimization = config.get("enable_global_optimization", True)
         self.slam_processing_fps = config.get("slam_processing_fps", 10)
         self.slam_keyframe_every = config.get("slam_keyframe_every", 5)
+        
+        # Emotion detection and room highlighting
+        self.emotion_room_mapper = EmotionRoomMapper()
+        self.enable_emotion_detection = config.get("enable_emotion_detection", True)
+        self.enable_room_highlighting = config.get("enable_room_highlighting", True)
         
         # Processing queues and timing
         self.frame_queue: List[VideoFrame] = []
@@ -289,6 +303,30 @@ class EnhancedMentraVideoPipeline:
         
         try:
             logger.debug(f"Processing frame {frame.frame_id} with SLAM context")
+            
+            # Run emotion detection and room highlighting (every frame)
+            if self.enable_emotion_detection:
+                emotion_mapper_result = await self.emotion_room_mapper.process_frame(
+                    frame=frame.frame,
+                    frame_id=frame.frame_id,
+                    timestamp=frame.timestamp
+                )
+                
+                # Update state with emotion results
+                self.state.current_emotion = emotion_mapper_result.get('current_emotion')
+                self.state.emotion_intensity = emotion_mapper_result.get('intensity', 0.0)
+                self.state.highlighted_rooms = emotion_mapper_result.get('rooms_highlighted', [])
+                
+                # Get emotion confidence from the emotion_result
+                emotion_result = emotion_mapper_result.get('emotion_result')
+                if emotion_result and hasattr(emotion_result, 'dominant_emotion') and emotion_result.dominant_emotion:
+                    self.state.emotion_confidence = emotion_result.dominant_emotion.confidence
+                else:
+                    self.state.emotion_confidence = 0.0
+                
+                logger.debug(f"Detected emotion: {self.state.current_emotion} "
+                           f"(intensity: {self.state.emotion_intensity:.2f}, "
+                           f"rooms: {len(self.state.highlighted_rooms)})")
             
             # Run segmentation (every frame for responsiveness)
             segmentation_result = await self.segmenter.segment_frame(
@@ -570,6 +608,25 @@ class EnhancedMentraVideoPipeline:
             "map_confidence": self.state.current_3d_model.map_confidence,
             "backend_used": self.state.current_3d_model.backend_used
         }
+    
+    async def get_emotion_status(self) -> Dict[str, Any]:
+        """Get emotion detection and room highlighting status"""
+        return {
+            "current_emotion": self.state.current_emotion,
+            "emotion_intensity": self.state.emotion_intensity,
+            "emotion_confidence": self.state.emotion_confidence,
+            "highlighted_rooms": self.state.highlighted_rooms,
+            "emotion_trends": self.emotion_room_mapper.get_emotion_trends(),
+            "mapper_status": self.emotion_room_mapper.get_current_status()
+        }
+    
+    async def get_room_highlighting_status(self) -> Dict[str, Any]:
+        """Get room highlighting status"""
+        return self.emotion_room_mapper.room_highlighter.get_highlighting_status()
+    
+    async def get_highlighted_map_image(self, width: int = 1000, height: int = 600) -> Optional[bytes]:
+        """Get highlighted map image as bytes"""
+        return self.emotion_room_mapper.get_highlighted_map_image(width, height)
     
     async def switch_slam_backend(self, backend_name: str) -> None:
         """Switch SLAM backend"""
