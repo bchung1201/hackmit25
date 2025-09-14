@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentra Real-Time Video Stream</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔴 Mentra Live Stream</h1>
+            <div class="status-bar">
+                <div class="connection-status" id="connectionStatus">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Disconnected</span>
+                </div>
+                <div class="stream-info" id="streamInfo">
+                    <span class="frame-counter">Frames: 0</span>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <div class="video-section">
+                <div class="video-container">
+                    <div id="videoPlayer" class="video-player">
+                        <iframe id="streamFrame" style="display:none;" allow="autoplay; fullscreen"></iframe>
+                        <video id="hlsVideo" style="display:none;" controls autoplay muted></video>
+                        <div id="placeholder" class="placeholder">
+                            <div class="placeholder-content">
+                                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect>
+                                    <line x1="7" y1="2" x2="7" y2="22"></line>
+                                    <line x1="17" y1="2" x2="17" y2="22"></line>
+                                    <line x1="2" y1="12" x2="22" y2="12"></line>
+                                    <line x1="2" y1="7" x2="7" y2="7"></line>
+                                    <line x1="2" y1="17" x2="7" y2="17"></line>
+                                    <line x1="17" y1="17" x2="22" y2="17"></line>
+                                    <line x1="17" y1="7" x2="22" y2="7"></line>
+                                </svg>
+                                <p>No stream active</p>
+                                <p class="placeholder-hint">Click "Start Stream" to begin</p>
+                                <p class="placeholder-hint" style="font-size: 12px; margin-top: 8px;">Using Mentra Preview Stream (iframe)</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="controls">
+                        <button id="startBtn" class="btn btn-primary">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M8 5v14l11-7z"/>
+                            </svg>
+                            Start Stream
+                        </button>
+                        <button id="stopBtn" class="btn btn-danger" style="display:none;">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <rect x="6" y="6" width="12" height="12"/>
+                            </svg>
+                            Stop Stream
+                        </button>
+                        <button id="fullscreenBtn" class="btn btn-secondary">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
+                            </svg>
+                            Fullscreen
+                        </button>
+                    </div>
+                </div>
+
+                <div class="info-panel">
+                    <h3>Stream Details</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <span class="info-label">Status</span>
+                            <span class="info-value" id="streamStatus">Idle</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Stream ID</span>
+                            <span class="info-value" id="streamId">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Format</span>
+                            <span class="info-value" id="streamFormat">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Duration</span>
+                            <span class="info-value" id="streamDuration">00:00</span>
+                        </div>
+                    </div>
+
+                    <div class="url-section" id="urlSection" style="display:none;">
+                        <h4>Stream URLs</h4>
+                        <div class="url-container">
+                            <div class="url-item" id="hlsUrlContainer" style="display:none;">
+                                <label>HLS URL:</label>
+                                <div class="url-input-group">
+                                    <input type="text" id="hlsUrl" readonly>
+                                    <button class="copy-btn" onclick="copyToClipboard('hlsUrl')">Copy</button>
+                                </div>
+                            </div>
+                            <div class="url-item" id="dashUrlContainer" style="display:none;">
+                                <label>DASH URL:</label>
+                                <div class="url-input-group">
+                                    <input type="text" id="dashUrl" readonly>
+                                    <button class="copy-btn" onclick="copyToClipboard('dashUrl')">Copy</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="processing-section">
+                        <h4>Processing Pipeline</h4>
+                        <div class="pipeline-status">
+                            <div class="pipeline-step" id="captureStep">
+                                <span class="step-icon">📹</span>
+                                <span class="step-name">Capture</span>
+                                <span class="step-status">Ready</span>
+                            </div>
+                            <div class="pipeline-step" id="streamStep">
+                                <span class="step-icon">📡</span>
+                                <span class="step-name">Stream</span>
+                                <span class="step-status">Ready</span>
+                            </div>
+                            <div class="pipeline-step" id="processStep">
+                                <span class="step-icon">🤖</span>
+                                <span class="step-name">Process</span>
+                                <span class="step-status">Ready</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="logs-section">
+                <h3>Activity Log</h3>
+                <div class="logs-container" id="logsContainer">
+                    <div class="log-entry info">
+                        <span class="log-time">--:--:--</span>
+                        <span class="log-message">Waiting for connection...</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <script src="/app.js"></script>
+</body>
+</html>

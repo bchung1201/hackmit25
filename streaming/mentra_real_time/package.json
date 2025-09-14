@@ -1,0 +1,24 @@
+{
+  "name": "mentra-real-time-stream",
+  "version": "1.0.0",
+  "description": "Simple Mentra glasses streaming pipeline for ML processing",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "bun --hot src/index.ts",
+    "build": "bun build src/index.ts --outdir dist --target node",
+    "start": "bun src/index.ts"
+  },
+  "dependencies": {
+    "@mentra/sdk": "^2.1.21",
+    "express": "^4.21.2",
+    "dotenv": "^16.4.5",
+    "cors": "^2.8.5",
+    "node-fetch": "^2.7.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.1",
+    "@types/node": "^22.13.14",
+    "@types/cors": "^2.8.17",
+    "@types/bun": "latest"
+  }
+}

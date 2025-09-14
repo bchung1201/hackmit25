@@ -1,0 +1,48 @@
+{
+  "description": "Real-time video streaming app with ML processing pipeline",
+  "permissions": [
+    {
+      "type": "CAMERA",
+      "description": "Stream real-time video from glasses for processing"
+    },
+    {
+      "type": "MICROPHONE",
+      "description": "Capture audio with video stream"
+    }
+  ],
+  "settings": [
+    {
+      "id": "stream_quality",
+      "type": "select",
+      "label": "Stream Quality",
+      "description": "Video streaming quality",
+      "default": "720p",
+      "options": [
+        { "value": "480p", "label": "480p - Low" },
+        { "value": "720p", "label": "720p - Standard" },
+        { "value": "1080p", "label": "1080p - High" }
+      ]
+    },
+    {
+      "id": "enable_ml_processing",
+      "type": "boolean",
+      "label": "Enable ML Processing",
+      "description": "Process video frames through ML pipeline",
+      "default": false
+    }
+  ],
+  "tools": [
+    {
+      "id": "toggle_stream",
+      "name": "Toggle Stream",
+      "description": "Start or stop the video stream",
+      "parameters": []
+    },
+    {
+      "id": "capture_frame",
+      "name": "Capture Frame",
+      "description": "Capture a single frame for processing",
+      "parameters": []
+    }
+  ]
+}
